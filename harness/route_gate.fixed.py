@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 r"""route_gate.fixed.py — the same gate, after the full fix. Ends GREEN.
 
-Getting here took three code/data changes on top of the two constants:
+Getting here took five changes on top of the migration: three in code, two in
+data.
 
   1. the two dangling constants             (code)  -> see route_gate.py
   2. the resident parser expected `### N ·` while the target writes

@@ -28,8 +28,9 @@ No dependencies. Python 3.8+. No network.
 
 ## What actually came out
 
-*(Verbatim output. The only edit is that the absolute path prefix of this
-checkout is shortened to `<repo>`.)*
+*(Verbatim output, with two disclosed edits: the absolute path prefix of this
+checkout is shortened to `<repo>`, and the `$ …` prompt lines and trailing
+`rc=N` lines are added — the scripts print neither of those themselves.)*
 
 ### 1 · It does not run
 
@@ -39,7 +40,9 @@ PROBE_FAULT rc=3 -- NameError: name 'AGENT_MEM' is not defined
 rc=3
 ```
 
-Fix `AGENT_MEM` — the obvious fix — and:
+Fix `AGENT_MEM` — the obvious fix — and you land on the next name. This state
+has no file of its own; delete `MEMORY_ROOT = ROOT` from `route_gate.py` to
+produce it:
 
 ```
 $ python harness/route_gate.py   # after defining AGENT_MEM only
@@ -103,7 +106,7 @@ Three files. All three compile. Three different exit codes.
 
 ---
 
-## The four layers
+## The three layers
 
 **Layer 1 — it does not run, and `compile()` says it does.**
 
@@ -132,9 +135,11 @@ checks it evaluated over an empty set.
 That last one is the useful part. A gate that has silently stopped
 discriminating is more dangerous than no gate, because it still prints a verdict.
 
-**Layer 4 — going green required changing the code *and* the data.**
+---
 
-Two more code fixes and two data fixes, all four necessary:
+## After the three layers: going green took five changes
+
+Three in code, two in data, and all five were necessary:
 
 | # | What was wrong | Where | Kind |
 |---|---|---|---|
